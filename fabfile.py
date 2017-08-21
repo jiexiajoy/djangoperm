@@ -36,8 +36,7 @@ def add():
 
 def commit():
     with settings(warn_only=True):
-        message = prompt('commit message: ', default='djangoperm')
-        result = local('git commit -m "{0}"'.format(message), capture=True)
+        result = local('git commit -m "djangoperm"', capture=True)
         if result.failed and not confirm('git commit failed, continue anyway? '):
             abort(red('aborting with user request - git commit'))
     print green('git commit success.')
@@ -51,6 +50,7 @@ def push():
     print green('git push success.')
 
 
+@runs_once
 def prepare_deploy():
     test()
     add()
