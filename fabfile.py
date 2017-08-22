@@ -22,8 +22,10 @@ def push():
     local('git push')
 
 
+@task
 def prepare_deploy():
-    add()
-    commit()
-    push()
+    with lcd(env.local_src_dir):
+        add()
+        commit()
+        push()
     print green('-- prepare_deploy success.')
