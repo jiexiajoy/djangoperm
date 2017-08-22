@@ -15,7 +15,9 @@ def add():
 
 
 def commit():
-    local('git commit -m "djangoperm"')
+    with warn_only():
+        result = local('git commit -m "djangoperm"', capture=True)
+        abort(dir(result))
 
 
 def push():
