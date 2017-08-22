@@ -14,5 +14,5 @@ def prepare_deploy():
     with lcd(env.local_src_dir):
         with warn_only():
             result = local('git add -A', capture=True).succeeded and local('git commit -m "djangoperm"', capture=True).succeeded and local('git push', capture=True).succeeded
-            if not result:
+            if result:
                 abort(red(output.stderr))
