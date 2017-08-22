@@ -13,8 +13,6 @@ env.local_src_dir = '/Users/manmanli/xm-webs/djangoperm/'
 @runs_once
 def prepare_deploy():
     with lcd(env.local_src_dir):
-        with warn_only():
-            commands = ['git add -A', 'git commit -m "djangoperm"', 'git push']
-            for res in dropwhile(lambda command: local(command).succeeded, commands):
-                print(res)
-        print green('-- prepare_deploy success.')
+        local('git add -A')
+        local('git commit -m "djangoperm"')
+        local('git push')
