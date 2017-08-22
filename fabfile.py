@@ -15,6 +15,6 @@ def prepare_deploy():
     with lcd(env.local_src_dir):
         with warn_only():
             commands = ['git add -A', 'git commit -m "djangoperm"', 'git push']
-            for res in dropwhile(lambda command: local(command).succeeded, commands):
+            for res in dropwhile(lambda command: local(command).return_code in (0, 1), commands):
                 abort(red(res))
         print green('-- prepare_deploy success.')
