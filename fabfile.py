@@ -10,25 +10,11 @@ from fabric.contrib.console import *
 env.local_src_dir = '/Users/manmanli/xm-webs/djangoperm/'
 
 
-def add():
-    local('git add -A')
-
-
-def commit():
-    with warn_only():
-        result = local('git commit -m "djangoperm"', capture=True)
-        if result.failed and 'nothing to commit' not in result:
-            abort(red(result))
-
-
-def push():
-    local('git push')
-
-
-@task
+@runs_once
 def prepare_deploy():
     with lcd(env.local_src_dir):
-        add()
-        commit()
-        push()
-    print green('-- prepare_deploy success.')
+        with warn_only():
+            commands = ['git add -A', 'git commit -m "djangoperm"', 'git push']
+            for res in dropwhile(lambda command: local(command).succeeded, commands):
+                abort(red(res))
+        print green('-- prepare_deploy success.')
