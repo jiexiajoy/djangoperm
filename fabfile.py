@@ -13,4 +13,4 @@ env.local_src_dir = '/Users/manmanli/xm-webs/djangoperm/'
 def prepare_deploy():
     with lcd(env.local_src_dir):
         with warn_only():
-            local('git add -A', capture=True).succeeded and local('git commit -m "djangoperm"', capture=True).succeeded and local('git push', capture=True).succeeded
+            local('git add -A', capture=True).succeeded and local('git commit -m "djangoperm"', capture=True).succeeded and local('git push', capture=True).succeeded and "xxxx" or "xx"
