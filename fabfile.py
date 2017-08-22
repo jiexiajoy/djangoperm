@@ -17,7 +17,7 @@ def add():
 def commit():
     with warn_only():
         result = local('git commit -m "djangoperm"', capture=True)
-        if result.failed:
+        if result.failed and 'Your branch is up-to-date' not in str(result):
             abort(red(result))
 
 
